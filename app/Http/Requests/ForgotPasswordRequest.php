@@ -8,13 +8,13 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class LoginRequest extends FormRequest {
+class ForgotPasswordRequest extends FormRequest {
   /**
    * Determine if the user is authorized to make this request.
    *
    * @return bool
    */
-  public function authorize(): bool {
+  public function authorize() {
     return true;
   }
 
@@ -26,7 +26,6 @@ class LoginRequest extends FormRequest {
   public function rules(): array {
     return [
       'email' => ['required', 'string', 'email', 'min:10', 'max:255'],
-      'password' => ['required', 'string', 'min:8', 'max:20'],
     ];
   }
 

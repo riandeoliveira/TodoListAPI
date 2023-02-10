@@ -1,0 +1,432 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Todo List API",
+        "description": "This is my description.",
+        "contact": {
+            "name": "Rian Oliveira",
+            "url": "https://github.com/riandeoliveira",
+            "email": "riandiasdeoliveira2001@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "0.0.1"
+    },
+    "paths": {
+        "/api/users/forgot-password": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Handles forgotten password logic",
+                "description": "Sends an email to the user with password reset data",
+                "operationId": "d26965bbdb4e80a788bf7fe1a52c9597",
+                "requestBody": {
+                    "description": "User email",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ForgotPasswordRequestSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ForgotPasswordResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    }
+                }
+            }
+        },
+        "/api/users/logged-user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get logged user",
+                "description": "Returns the data of the currently logged user.",
+                "operationId": "e02f9e72d700d727d81b756f503ce2bb",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoggedUserResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/users/login": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Login a user",
+                "description": "Log a user into the system.",
+                "operationId": "c9b20e2431404b7383ce7e626b4b6f05",
+                "requestBody": {
+                    "description": "User data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequestSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LoginResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    }
+                }
+            }
+        },
+        "/api/users/logout": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Logout the user",
+                "description": "Close the user session.",
+                "operationId": "3e9b6e86a2a7da7ecd86805af1848e0b",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LogoutResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/users/register": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Register a user",
+                "description": "Register a user in the system.",
+                "operationId": "758e750cf3b7f1b6a9c906c443a12b83",
+                "requestBody": {
+                    "description": "User data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterRequestSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RegisterResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    }
+                }
+            }
+        },
+        "/api/users/reset-password?token={token}": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Reset user password",
+                "description": "Updates the user's password, allowing him to access the system again.",
+                "operationId": "7a662abc92a995014425325443fea22f",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "description": "Token for user password reset.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "New user password",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPasswordRequestSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResetPasswordResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ForgotPasswordRequestSchema": {
+                "title": "ForgotPasswordResponse",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "johndoe2000@email.com"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginRequestSchema": {
+                "title": "LoginRequest",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "johndoe2000@email.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "$LittleJohn2000#"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterRequestSchema": {
+                "title": "RegisterRequest",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "johndoe2020@email.com"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "John Doe"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "$LittleJohn2000#"
+                    }
+                },
+                "type": "object"
+            },
+            "ResetPasswordRequestSchema": {
+                "title": "ResetPasswordRequest",
+                "properties": {
+                    "password": {
+                        "type": "string",
+                        "example": "$NewJohn2077#"
+                    },
+                    "password_confirmation": {
+                        "type": "string",
+                        "example": "$NewJohn2077#"
+                    }
+                },
+                "type": "object"
+            },
+            "ForgotPasswordResponseSchema": {
+                "title": "ForgotPasswordResponse",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LoggedUserResponseSchema": {
+                "title": "LoggedUserResponse",
+                "properties": {
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "email_verified_at": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginResponseSchema": {
+                "title": "LoginResponse",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "email_verified_at": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "LogoutResponseSchema": {
+                "title": "LogoutResponse",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterResponseSchema": {
+                "title": "RegisterResponse",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "email_verified_at": {
+                                "type": "string"
+                            },
+                            "created_at": {
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            },
+            "ResetPasswordResponseSchema": {
+                "title": "ResetPasswordResponse",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "sanctum": {
+                "type": "http",
+                "description": "Laravel Sanctum token authentication",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "User",
+            "description": "Endpoints for authentication features"
+        }
+    ]
+}

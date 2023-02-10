@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\{AuthController, UserController};
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,17 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::controller(AuthController::class)
-  ->prefix('auth')
-  ->group(function(): void {
-    Route::middleware('auth:sanctum')->get('/logged-user', 'loggedUser');
-    Route::middleware('auth:sanctum')->get('/logout', 'logout');
-    Route::post('/login', 'login');
-    Route::post('/register', 'register');
-  });
-
 Route::controller(UserController::class)
   ->prefix('users')
   ->group(function(): void {
-    Route::get('/all', 'index');
+    Route::middleware('auth:sanctum')->get('/logged-user', 'loggedUser');
+    Route::middleware('auth:sanctum')->get('/logout', 'logout');
+    Route::patch('/reset-password', 'resetPassword');
+    Route::post('/forgot-password', 'forgotPassword');
+    Route::post('/login', 'login');
+    Route::post('/register', 'register');
   });
