@@ -282,6 +282,50 @@
                     }
                 ]
             }
+        },
+        "/api/users/update-password": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user password",
+                "description": "Updates the user's password when he is logged.",
+                "operationId": "376c319b3e1b6dfb5f67620363192354",
+                "requestBody": {
+                    "description": "New user password",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdatePasswordRequestSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdatePasswordResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -348,6 +392,24 @@
                     "email": {
                         "type": "string",
                         "example": "newjohndoe2000@email.com"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePasswordRequestSchema": {
+                "title": "UpdatePasswordRequest",
+                "properties": {
+                    "current_password": {
+                        "type": "string",
+                        "example": "$LittleJohn2000#"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "$NewJohn2077#"
+                    },
+                    "password_confirmation": {
+                        "type": "string",
+                        "example": "$NewJohn2077#"
                     }
                 },
                 "type": "object"
@@ -469,6 +531,15 @@
             },
             "UpdateEmailResponseSchema": {
                 "title": "UpdateEmailResponse",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdatePasswordResponseSchema": {
+                "title": "UpdatePasswordResponse",
                 "properties": {
                     "message": {
                         "type": "string"
