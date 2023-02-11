@@ -238,6 +238,50 @@
                     }
                 }
             }
+        },
+        "/api/users/update-email": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user email",
+                "description": "Updates the user's email when he is logged.",
+                "operationId": "7b8369a11c35098f3f1238dfcc5a3855",
+                "requestBody": {
+                    "description": "New user email",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateEmailRequestSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateEmailResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "components": {
@@ -294,6 +338,16 @@
                     "password_confirmation": {
                         "type": "string",
                         "example": "$NewJohn2077#"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateEmailRequestSchema": {
+                "title": "UpdateEmailRequest",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "example": "newjohndoe2000@email.com"
                     }
                 },
                 "type": "object"
@@ -406,6 +460,15 @@
             },
             "ResetPasswordResponseSchema": {
                 "title": "ResetPasswordResponse",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateEmailResponseSchema": {
+                "title": "UpdateEmailResponse",
                 "properties": {
                     "message": {
                         "type": "string"
