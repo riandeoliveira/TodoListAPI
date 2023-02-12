@@ -306,6 +306,50 @@
                 ]
             }
         },
+        "/api/users/update-name": {
+            "patch": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user name",
+                "description": "Updates the user's name when he is logged.",
+                "operationId": "64395ee4002b6993483aac83ca2af4ed",
+                "requestBody": {
+                    "description": "New user name",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UpdateNameRequestSchema"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UpdateNameResponseSchema"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable Content"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
         "/api/users/update-password": {
             "patch": {
                 "tags": [
@@ -419,6 +463,16 @@
                     "email": {
                         "type": "string",
                         "example": "newjohndoe2000@email.com"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateNameRequestSchema": {
+                "title": "UpdateNameRequest",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "John Doe"
                     }
                 },
                 "type": "object"
@@ -569,6 +623,15 @@
                 "title": "UpdateEmailResponse",
                 "properties": {
                     "message": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateNameResponseSchema": {
+                "title": "UpdateNameResponse",
+                "properties": {
+                    "name": {
                         "type": "string"
                     }
                 },
