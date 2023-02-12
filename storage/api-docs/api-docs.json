@@ -391,6 +391,10 @@
                     "password": {
                         "type": "string",
                         "example": "$LittleJohn2000#"
+                    },
+                    "username": {
+                        "type": "string",
+                        "example": "johndoe"
                     }
                 },
                 "type": "object"
@@ -466,6 +470,9 @@
                     },
                     "updated_at": {
                         "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
@@ -480,6 +487,9 @@
                         "properties": {
                             "id": {
                                 "type": "integer"
+                            },
+                            "username": {
+                                "type": "string"
                             },
                             "name": {
                                 "type": "string"
@@ -521,6 +531,9 @@
                         "properties": {
                             "id": {
                                 "type": "integer"
+                            },
+                            "username": {
+                                "type": "string"
                             },
                             "name": {
                                 "type": "string"
